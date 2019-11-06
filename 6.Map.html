@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6.Map</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+
+/*
+    1 字典：是用来存储不重复key的Hash结构。不同于集合(Set)的是，字典使用的是[键，值]的形式来存储数据
+
+    2 JavaScript的对象Object 只能用字符串当做键，这给它的使用带来了很大的限制
+
+    3 为了解决这个问题，ES6提供了Map数据结构。它类似于对象，也是键值对的集合，但是"键"的范围不限于字符串，各种类型的值（包括对象）
+    都可以当做键。也就是说, Object结构提供了“字符串-值”的对应，Map接口提供了“值与值”的对应，是一种更完善的Hash结构实现，如果需要
+    使用"键值对"的数据接口，Map比Object更合适
+
+*/
+
+// Obj *****************************
+
+// var data1 = { a: 1 }
+//
+// var data2 = { b: 2 }
+//
+// obj = {}
+//
+// obj[data1] = 1;
+// obj[data2] = 2;
+//
+// console.log(obj)  // [object Object]: 2
+// console.log(data1.toString() === data2.toString()) // true  这就说明了 console.log(obj) // 2
+
+// Map*******************************
+
+    // const m = new Map();
+    // const o = {p: 'Hello World'};
+    //
+    // m.set(o, 'content')
+    // m.get(o) // "content"
+    // console.log(m) // Map本身是一个List的键值对集合
+/*
+
+    Map(1) {{…} => "content"}
+        [[Entries]]
+        0: {Object => "content"}
+        key: {p: "Hello World"}
+        value: "content"
+        size: (...)
+        __proto__: Map
+
+*/
+
+const map = new Map([
+    ['a', 1],
+    ['b', 2]
+])
+
+console.log(map)  // Map(2) {"a" => 1, "b" => 2}
+
+const brr =['aa', 11]
+const crr =['cc', 22]
+
+const drr = [brr, crr]
+
+const map2 = new Map(drr)
+
+console.log(map2)  // Map(2) {"aa" => 11, "cc" => 22}
+
+// Map 类的属性  set size 可以一直set
+
+map2.set("bb", 33).set("cc", 40)
+
+
+    //  Map.get(key) 该key不存在 则返回undefined
+
+    // delete(key) 成功 true  失败 false
+
+    // has(key)
+
+    // clear() 清空所有的key 没有返回值
+
+    // map.keys() 键名集合
+
+    // map.values()
+
+    // map.entries()
+
+
+map2.forEach(function (key, value, map) {
+    console.log(key + ': ', value)
+})
+
+    // map 使用过程中应该注意的事项  map的顺序按照添加顺序来的
+
+    map2.set(NaN, 10).set(NaN, 100)
+
+    console.log(map2.get(NaN)) // 100
+
+    map2.set({}, 20).set({}, 200)
+
+    console.log(map2)
+
+// 0: {"aa" => 11}
+// 1: {"cc" => 40}
+// 2: {"bb" => 33}
+// 3: {NaN => 100}
+// 4: {Object => 20}
+// 5: {Object => 200}
+
+    console.log(map2.get({})) // undefined ?? 如何取呢？
+
+
+
+
+</script>

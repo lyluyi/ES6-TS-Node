@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Set</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+
+    /*
+
+        Set  类似数组  但是值无序
+
+        无重复值  也没有索引，即下标的概念
+
+    */
+
+    let s1 = new Set()
+
+     let a = s1.add(1)
+    console.log(a)
+    let b = s1.delete(1)
+    console.log(b) // true
+
+
+    // console.log(s1)
+
+    /*
+
+        Set(0)
+            [[Entries]]
+            No properties
+            size: (...)
+            __proto__: Set
+            add: ƒ add()
+            clear: ƒ clear()
+            constructor: ƒ Set()
+            delete: ƒ delete()
+            entries: ƒ entries()
+            forEach: ƒ forEach()
+            has: ƒ has()
+            keys: ƒ values()
+            size: (...)
+            values: ƒ values()
+            Symbol(Symbol.iterator): ƒ values()
+            Symbol(Symbol.toStringTag): "Set"
+            get size: ƒ size()
+            __proto__: Object
+
+    */
+
+    //
+    // s1.add('a')
+    // console.log(s1)
+
+
+    // let arr1 = ['a', 'b', 'c', 'a', 'e', 'c']
+    //
+    // arr1 = [...new Set(arr1)]
+    //
+    // console.log(arr1) //  ["a", "b", "c", "e"]
+    //
+    // let { length: len } =  'qaqaq'
+    //
+    // let { toString: ts } = 1
+    //
+    // let { toString: bs } = true
+    //
+    // console.log(len) // 5
+    //
+    // console.log(ts === Number.prototype.toString)  // true
+    // console.log(bs === Boolean.prototype.toString) // true
+    // console.log(Number.prototype)  // Number {0, constructor: ƒ, toExponential: ƒ, toFixed: ƒ, toPrecision: ƒ, …}
+    // console.log(Boolean.prototype) // Boolean {false, constructor: ƒ, toString: ƒ, valueOf: ƒ}
+
+
+
+
+
+
+
+</script>

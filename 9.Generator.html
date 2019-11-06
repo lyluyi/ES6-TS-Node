@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9.Generotor</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+
+    function *fn() {
+
+        console.log(1)
+
+        // 异步操作
+        yield console.log('a')
+
+        console.log(2)
+    }
+
+    // 返回一个迭代器函数
+    let f = fn()
+
+    f.next()
+
+</script>

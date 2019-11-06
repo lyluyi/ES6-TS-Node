@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3.函数扩展</title>
+</head>
+<body>
+
+<ul>
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+</ul>
+
+</body>
+</html>
+
+<script>
+
+    // 函数扩展 1.函数参数默认值 2. rest 剩余参数
+
+    // 1.
+    // function fn1(x = 0, y = 0) { // 在形参中设置默认值，不是所有的形参都有默认值, 有默认值的形参，一般放参数最后
+    //     console.log(x, y)
+    // }
+    //
+    // function fn2(x, y = 10) {
+    //     console.log(x, y)
+    // }
+
+    // 2.
+
+    // function arrayPush(arr, x, y, z) { // 不定参
+    //
+    //     // arguments
+    //     var arr = arguments[0]
+    //     for (var i = 0; arr < arr.length; i++) {
+    //         arr.push(arguments[i])
+    //     }
+    //
+    // }
+
+    // function arrayPush6(arr, ...newData) { // 不定参
+    //
+    // }
+    //
+    // var arr1 = [1, 2, 3]
+    // arrayPush(arr1, 'a', 'b', 'c')
+    // console.log(arr1)
+
+    // 箭头函数使用的注意事项
+
+    /*
+
+            箭头函数内部this对象指向创建期上下文对象
+
+            普通函数的this指向是在函数的执行期内绑定的
+
+    */
+
+    // function fn6() {
+    //     console.log(this)
+    // }
+    //
+    // fn6() // 指向windows
+    //
+    // var obj = {}
+    // obj.f = fn6
+    // obj.f() // 指向Obj
+    //
+    // document.onclick = fn6; // 指向触发该事件的对象 document
+    //
+    // let fn7 = () => {  // 箭头函数的this在函数创建期间就绑定好了，箭头函数的this指向创建该箭头函数所在的作用域对象（this）
+    //     console.log(this)
+    // }
+    //
+    //
+    // fn7()  //  Window {parent: Window, postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, …}
+    //
+    // document.onclick = fn7
+    // fn7() //  Window {parent: Window, postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, …}
+
+
+    // ***********************************************
+
+    //
+    // var lis = document.querySelectorAll('li')
+    //
+    // for (let i = 0; i < lis.length; i++) { // 使用let 使得 i变成了局部变量，不会存在 var i = 3 的全局提升
+    //
+    //     lis[i].onclick = function () {
+    //
+    //         let fn = () => { // 箭头函数创建的时候绑定了，所以指向了lis[i] dom对象
+    //             this.style.background = 'red'
+    //         }
+    //
+    //         setTimeout(fn, 1000)
+    //
+    //         // 非箭头函数执行的时候，this在执行的时候绑定，因为在setTimeout中执行，所以this的指向是setTimeout的windows  会报错
+    //
+    //         // setTimeout(function () {
+    //         //
+    //         //     this.style.background = 'red'
+    //         //
+    //         // }, 1000)
+    //
+    //     }
+    // }
+
+
+    // 箭头函数中 没有arguments的概念
+
+    // function  fn9() {
+    //     console.log(arguments)   //  Arguments(3) [1, 2, 3, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+    // }
+    //
+    // fn9(1, 2, 3)
+    //
+    // let fn8 = () => {
+    //     console.log(arguments)  // arguments is not defined
+    // }
+    //
+    // fn8(1, 2, 3)
+
+    /*
+
+     箭头函数-注意事项
+
+    1 内部this对象指向创建期上下文对象
+    2 不能作为构造函数
+    3 没有arguments
+    4 不能作为生成器函数
+
+    */
+
+
+</script>

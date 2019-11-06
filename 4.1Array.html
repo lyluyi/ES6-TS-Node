@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4.1Array</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+
+    // console.log(['a', 'b', 'c'].includes('b')) // true
+    //
+    // var arr1 = ['a', 'b', 'c']
+    //
+    // arr1.forEach(function (v, k, s) { // 迭代
+    //     // console.log(v, k, s) // el index arr1
+    //     console.log(this) // windows
+    // })
+    //
+    // arr1.forEach(function (v, k, s) { // 迭代
+    //     // console.log(v, k, s) // el index arr1
+    //     console.log(this) // ['a', 'b', 'c']
+    // }, arr1) // arr1 将上下文的环境指向arr1
+
+
+    //*******************************************
+    
+    // var arr2 = ['a', 'b', 'c']
+    //
+    // function forEach(data, callback, context) {
+    //     for (var i = 0; i < data.length; i++) {
+    //         callback.call(context, data[i], i, data) // call 参数并非集合
+    //     }
+    // }
+    //
+    // forEach(arr2, function (v, k, s) {
+    //     console.log(v, k ,s)
+    //     console.log(this)
+    // }, arr2)
+
+
+
+
+    var arr3 = ['a', 'b', 'c']
+
+    let res = arr3.every(v => {
+        return true
+    })
+    console.log(res)
+
+    // [...DivList].every  遍历DOM节点时，可以将类数组，转数组
+
+    var arr4 = [1, 2, 5, 7, 9 ,11]
+
+    arr4.reduce(function (prev, current) {
+
+        return prev + current
+
+    }, 0) // 初始值
+
+</script>

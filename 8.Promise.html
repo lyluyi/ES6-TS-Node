@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.Promise</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+
+//    基本概念：
+//        Promise: 是ES6中新增的异步编程解决方案，体现在代码中它是一个对象，可以通过Promise构造函数来实例化
+//
+//
+//    new Promise(cb) ===> 实例的基本使用 三个状态：Pending Resolved  Rejected
+//
+//    两个原型方法：
+//
+//    Promise.prototype.then()
+//    Promise.prototype.catch()
+//
+//    两个常用静态方法：
+//
+//    Promise.all()
+//
+//    Promise.resolve()
+
+    // Promise 是一个构造函数  接受一个参数:callback
+
+    let p1 = new Promise((resolve, reject) => {
+
+        // 当Promise被实例化的时候, callback的异步任务就会被执行
+
+        // 可以通过传入的resolve,reject，去改变当前Promise任务的状态
+
+        // resolve,reject是两个函数，调用resolve函数，会将状态改成resolved，调用reject函数会把状态改成rejected
+        setTimeout(() => {
+
+            console.log(1)
+
+            // resolve() // 1234
+            reject() // 1 a 3 4
+
+        }, 1000)
+
+    })
+
+    // console.log(p1)
+
+    // Promise的then方法会默认返回一个Promise对象，状态为Reslove
+
+    p1.then(() => {
+        console.log(2)
+    }, () => {
+        console.log('a')
+        return new Promise.reject()
+    }).then(() => {
+        console.log(3)
+    }, () => {
+        console.log('b')  // 1 a b 4
+    }).then(() => {
+        console.log(4)
+    })
+
+    // catch的异常捕获，同样也会返回一个resolved状态的Promise对象
+
+
+
+</script>

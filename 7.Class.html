@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7.Class</title>
+    <style>
+
+        #canvas {
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+</head>
+<body>
+
+<canvas id="canvas" ></canvas>
+
+</body>
+</html>
+
+<script>
+
+// constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用改方法，一个类必须有contructor方法，如果没有显式定义
+//     一个空的contructor方法会被默认添加
+
+    // class P {}
+    //
+    // const p = new P()
+    //
+    // console.log(p)  //         P__proto__: constructor: class P__proto__: Object
+    //
+    // console.log(P())  //  Class constructor P cannot be invoked without 'new'
+
+
+    // class的继承 和 其他特性
+
+    // extend  static  super
+
+    const canvas = document.getElementById("canvas")
+    const ctx = canvas.getContext('2d') // 获取绘图画面
+
+    const w = canvas.width = 600
+    const h = canvas.height = 400
+
+    class Ball {
+
+        constructor(x, y, z) {
+
+            this.x = x
+            this.y = y
+            this.z = z
+            this.color = `rgb(${~~Ball.rpFn([55, 255])}, ${~~Ball.rpFn([55, 255])}, ${~~Ball.rpFn([55, 255])})` // 随机RGB
+
+            return this;
+
+        }
+
+        render (ctx) {
+            ctx.save()
+            ctx.translate(this.x, this.y)
+            ctx.fillStyle = this.color
+            ctx.beginPath()
+            ctx.arc(0, 0, this.z, 0, 2*Math.PI)
+            ctx.fill()
+            ctx.restore()
+            return this
+        }
+
+        static  rpFn (arr) { // 调用静态方法 Ball.rpFn([1, 10])
+            let max = Math.max(...arr)
+            let min = Math.min(...arr)
+
+            return Math.random() * (max - min) + min
+        }
+
+    }
+
+    // const ball1 = new Ball(100, 100, 30).render(ctx)  // 绘制一个静态的小球
+
+
+    // 集成Ball
+
+    class superBall extends Ball { // 继承
+
+        constructor(x, y, z) {  // 存在继承类的时候，需要调用super函数，对父类进行初始化
+            super(x, y, z)  // 在 constructor中调用super 函数对父类进行初始化, 才能达到继承以及this上下环境法人目的
+
+            this.vy = superBall.rpFn([2, 4]) // 在构造函数中集成父类Ball的静态方法 初始速度
+            this.g = superBall.rpFn([0.2, 0.4]) // 加速度
+            this.a = 0
+            return this
+        }
+
+        move(ctx) {
+
+            this.y += this.vy // 纵坐标 加 速度 * 时间（时间默认为1秒）
+            this.vy += this.g // 速度的增量
+
+            let current = this.vy * -0.75 // -0.75 摩擦系数
+
+            if (this.y + this.z >= ctx.canvas.height) { // 到底了 纵向坐标 + 半径
+
+                this.y = ctx.canvas.height - this.z // 重新复制纵坐标
+
+                if (Math.abs(current - this.a) < 0.01) return false
+
+                this.a = this.vy *= -0.75
+
+            }
+
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+
+            super.render(ctx); // 调用父类的render
+
+            return true
+
+        }
+    }
+// const ball1 = new superBall(100, 100, 30).render(ctx)  // 绘制一个静态的小球
+
+    let ball, timer;
+
+    canvas.onclick = function (e) {
+        let x = e.offsetX, y = e.offsetY;
+
+        let r = ~~Ball.rpFn([25, 55])
+
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+
+        ball = new superBall(x, y, r).render(ctx)
+
+        ballMove()
+    }
+
+    function ballMove() {
+
+        timer =  window.requestAnimationFrame(ballMove)
+
+        if (!ball.move(ctx)) {
+
+            window.cancelAnimationFrame(timer)
+
+        }
+
+    }
+
+
+
+
+</script>

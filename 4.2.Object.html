@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4.2.Object</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+
+
+    // 浅拷贝
+    // Object.assign({}, { x: 1, y: 2 });
+    //
+    //
+    // let obj2 = { x: 1, y: 2, z: [1, 2, 3] }
+    // let obj1 = {}
+    //
+    // let obj3 = Object.assign(obj1, obj2)
+    //
+    // obj3.z.push(44)
+    //
+    // console.log(obj2) // { x: 1, y: 2, z: [1, 2, 3, 44] }
+
+
+
+    // Object.create()  创建对象原型属性的
+
+    // let o = Object.create({a: 1, b: 2})
+    //
+    // console.log(o)  // {}
+
+
+    // Object.defineProprety
+
+    // let a = { x: 1 }
+    //
+    // a.y = 10
+    //
+    // Object.defineProperty(a, 'z', {
+    //     value: 100
+    // })
+    //
+    // console.log(a)  // {x: 1, y: 10, z: 100}  在默认情况下，z属性不可修改 不可枚举 不可删除
+    //
+    // for (attr in a) {
+    //     console.log(attr) // x, y
+    // }
+
+
+    // Object.defineProperty(a, 'z', {
+    //     value: 100,
+    //     writable: true, // 此时可改写
+    //     enumerable: true // 是否可枚举
+    // })
+
+
+
+    // for in 是取的对象可枚举的属性 包括该对象的原型可枚举属性
+
+    // var obj5 = { x: 1 }
+    //
+    // Object.prototype.yy = 100
+    //
+    // for (attr in obj5) {
+    //     console.log(attr) // x yy
+    // }
+
+
+
+    var obj6 = { x: 1 }
+
+    Object.defineProperty(obj6, 'yy', {
+        value: 100
+    })
+
+    for (attr in obj6) {
+        console.log(attr) // x
+    }
+
+</script>

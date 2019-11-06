@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.迭代协议、迭代器、自定义迭代</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+
+//    迭代：
+//
+//    迭代协议： 规定了迭代与实现之间的逻辑
+//
+//    迭代器
+//
+//        具体的迭代实现逻辑
+//
+//    迭代对象
+//
+//        是可被迭代的对象 - [Symbol.iterator] 方法 ES2015
+//
+//    迭代语句
+//
+//    for ... in : 以原始插入的顺序迭代对象的可枚举属性
+//
+//    for ... of : 根据迭代对象的迭代器具体实现迭代对象数据
+//
+
+  /*
+        for ... of
+ */
+
+  // var arr = ['a', 'b', 'c']
+
+  //   for (var attr in arr) {
+  //       console.log(attr)  // 0 1 2
+  //   }
+
+    // for(var attr of arr) {
+    //     console.log(attr)  // a b c
+    // }
+
+    // var elements = document.querySelectorAll('*')
+    // console.log(elements)
+    //
+    // for(var attr of elements) {
+    //     console.log(attr)  // 打印出来所有的节点
+    // }
+
+
+    /*
+        迭代对象
+
+            实现了迭代器的对象
+            迭代器：方法[Symbol.iterator]
+
+     */
+
+    var obj = {
+        left: 100,
+        top: 200
+    }
+
+    // for (var attr of obj) {
+    //     console.log(obj)  //  obj is not iterable
+    // }
+
+    // obj[Symbol.iterator] = function () {
+    //     let keys = Object.keys(obj); // ['left', 'top']
+    //     let len = keys.length
+    //     var n = 0
+    //     return {
+    //         next: function () {
+    //
+    //             if (n < len) {
+    //                 return {
+    //                     value: keys[n++], // obj[key[n++]] : 100, 200
+    //                     done: false
+    //                 }
+    //             } else  {
+    //                 return {
+    //                     value: '',
+    //                     done: true
+    //                 }
+    //             }
+    //
+    //         }
+    //     }
+    // }
+    //
+    // for (var attr of obj) {
+    //     console.log(attr) // left, top
+    // }
+
+    obj[Symbol.iterator] = function () {
+        let keys = Object.keys(obj); // ['left', 'top']
+        let len = keys.length
+        var n = 0
+        return {
+            next: function () {
+
+                if (n < len) {
+                    return {
+                        value: { k: keys[n], v: obj[keys[n++]] }, // 这个时候 有个注意点 n++ 只能用一个 后面的一个
+                        done: false
+                    }
+                } else  {
+                    return {
+                        value: '',
+                        done: true
+                    }
+                }
+
+            }
+        }
+    }
+
+    for (var attr of obj) {
+        console.log(attr) // { k: left, v: 100 }, { key: top, v: 200 }
+    }
+
+</script>

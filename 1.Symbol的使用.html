@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Symbol的使用</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+
+
+    // symbol的使用  属性私有化- 数据保护
+
+    // function Persoon(name, gender) {
+    //
+    //     this.name = name
+    //     this.gender = gender
+    //
+    // }
+    //
+    // var p1 = new Persoon("AAA", "man")
+    // console.log(p1.name) // AAA  name可以改变，如果想要私有性别属性，受保护
+
+    // var person = (function () {
+    //
+    //     var _gender = ''
+    //
+    //     function Person(name, gender) {
+    //         this.name = name
+    //         // this.gender = gender
+    //
+    //         _gender = gender // 通过闭包将属性私有化
+    //     }
+    //
+    //     p.prototype.getGender = function () {
+    //
+    //         return _gender
+    //
+    //     }
+    //
+    //     return Person
+    //
+    // })()
+    //
+    //
+    // var p2 = new Person("BBB", "women")
+    // console.log(p2)
+
+    var Person = (function () {
+
+        let _gender = Symbol('gender')
+
+        function P(name, gender) {
+            this.name = name
+            this[_gender] = gender
+        }
+
+        P.prototype.say = function () {
+            console.log(this[_gender])
+        }
+
+        return P
+
+    })()
+
+    var p3 = new Person("CCC", "man")
+    console.log(p3)
+    console.log(p3[Symbol('gender')]) // undefined 私有后 外部无法访问
+    console.log(p3.say())  // undefined
+</script>
