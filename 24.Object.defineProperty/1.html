@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object.defineProperty</title>
+</head>
+<body>
+    <div id="app">
+        <h2 id="title" >title</h2>
+        <button id="btn">btn</button>
+    </div>
+</body>
+</html>
+
+<script>
+
+    // 响应式原理
+    //
+    // 把一个普通的JavaScript对象传给Vue实例的data选项
+    //
+    // Vue将遍历此对象所有的属性，并使用Object.defineProperty把这些属性全部转化为
+    // getter/setter
+    //
+    // Vue内部会对数据进行劫持操作，进而追踪依赖，在属性被访问和修改时，通知变化
+
+    var data = {
+        title: 'title111',
+        list: ['111', '222', '333']
+    }
+
+    // 使用数据的时候，先对数据进行劫持（代理）
+    // 使用Object.defineProperty劫持数据，把属性转成访问器的方式
+
+    // setter
+    //
+    // getter
+
+    // 定义属性  也可在原有的属性上描述
+
+    Object.defineProperty(data, 'aaaa', {
+        // 这些属性为 数据描述
+        value: '11111',
+        writable: false,  // 设置false 不允许改写
+        enumerable: false, // 是否可以枚举
+        configurable: false // 不允许被删除
+    })
+
+    Object.defineProperty(data, 'title', {
+        value: '重新定义'
+    })
+
+    for (var attr in data) {
+        console.log(attr)
+    }
+
+    // 删除对象的属性
+    delete data.title // 不允许被删除
+
+
+
+    var title = document.getElementById('title')
+    var btn = document.getElementById("btn")
+
+    title.innerHTML = data.title
+
+    btn.onclick = function () {
+        data.title = '数据change'
+        title.innerHTML = data.title
+    }
+
+
+
+
+
+
+
+</script>

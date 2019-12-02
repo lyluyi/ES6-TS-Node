@@ -1,0 +1,346 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/mui.mui.css" />
+	</head>
+
+	<body>
+		<div class="header_title">
+			<span>基金委知识库</span>
+		</div>
+		<div id="content">
+			<div class="mui-content" id="news">
+				<div class="swiper-container" id="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" v-for="(item,index) in items" :key="index">
+							<a href="javascript:;" :data-guid="item.guid" @tap="open_detail(item)">
+								<img :src="item.cover">
+								<p class="mui-slider-title">
+									<img src="img/new_bg.png" >
+									<span>{{item.title}}</span>
+								</p>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mu-action-back">
+				<ul>
+					<li><a href="">
+							<img src="img/ico01.png" class="mui-media-object">
+							<div class="mu-action-txtle">论文量<span>426,670</span></div>
+						</a></li>
+					<li><a href="">
+							<img src="img/ico02.png" class="mui-media-object">
+							<div class="mu-action-txtle">机构数<span>426,670</span></div>
+						</a></li>
+					<li><a href="">
+							<img src="img/ico03.png" class="mui-media-object">
+							<div class="mu-action-txtle">人员数<span>642,111</span></div>
+						</a></li>
+					<li><a href="">
+							<img src="img/ico04.png" class="mui-media-object">
+							<div class="mu-action-txtle">目数 <span>257,00</span></div>
+						</a></li>
+				</ul>
+			</div>
+			<div class="about-me-icons">
+				<ul class="mui-table-view mui-grid-view">
+					<li class="mui-table-view-cell mui-media mui-col-xs-6" tabBarId="aaa1" >
+						<a  href="#">
+							<img class="mui-media-objects" src="img/new_ico.png">
+						</a></li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6" tabBarId="aaa2" >
+						<a href="#">
+							<img class="mui-media-objects" src="img/ser_ico.png">
+						</a></li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6" tabBarId="aaa3" >
+						<a href="#">
+							<img class="mui-media-objects" src="img/m_ico.png">
+			
+						</a></li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6" tabBarId="aaa4" >
+						<a href="#">
+							<img class="mui-media-objects" src="img/i_ico.png">
+						</a></li>
+				</ul> 
+			</div>
+			
+		</div>
+
+
+<!--		<div class="mui-content">-->
+<!--			<nav id="bar" class="mui-bar mui-bar-tab">-->
+<!--				<a class="mui-tab-item mui-active" href=" " data-id="wdsy">-->
+<!--					<span class="mui-icon mui-icon-home"></span>-->
+<!--					<span class="mui-tab-label">首页</span>-->
+<!--				</ a>-->
+<!--				<a class="mui-tab-item" href="news/news-list.html" data-id="main">-->
+<!--					<span class="mui-icon mui-icon-bars"></span>-->
+<!--					<span class="mui-tab-label">新闻</span>-->
+<!--				</ a>-->
+<!--				<a class="mui-tab-item" href="tab-firstpage-basesearch.html" data-id="xkdt">-->
+<!--					<span class="mui-icon mui-icon-search"></span>-->
+<!--					<span class="mui-tab-label">基础检索</span>-->
+<!--				</ a>-->
+<!--				<a class="mui-tab-item" href="tab-firstpage-interative.html" data-id="jhcx">-->
+<!--					<span class="mui-icon mui-icon-map"></span>-->
+<!--					<span class="mui-tab-label">交互查询</span>-->
+<!--				</ a>-->
+<!--				<a class="mui-tab-item" href="tab-firstpage-multidimensional.html" data-id="yxl">-->
+<!--					<span class="mui-icon mui-icon-contact"></span>-->
+<!--					<span class="mui-tab-label">多维统计</span>-->
+<!--				</ a>-->
+<!--				<a class="mui-tab-item" href="tab-firstpage-me.html" data-id="me">-->
+<!--					<span class="mui-icon mui-icon-gear"></span>-->
+<!--					<span class="mui-tab-label">更多</span>-->
+<!--				</ a>-->
+<!--			</nav>-->
+<!--		</div>-->
+<!--		<script src="js/mui.min.js"></script>-->
+<!--		<script>-->
+<!--			mui.init();-->
+<!--			mui.plusReady(function() {-->
+<!--				var self = plus.webview.currentWebview();-->
+<!--				var current = '';-->
+<!--				var styles = {-->
+<!--					top: '0',-->
+<!--					bottom: '50px'-->
+<!--				};-->
+<!--				var tabsConfig = {-->
+<!--					wdsy: {-->
+<!--						url: 'tab-firstpage-home.html',-->
+<!--						styles: styles,-->
+<!--						default: true-->
+<!--					},-->
+<!--					main: {-->
+
+		
+		<script src="config/global.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="assets/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="news/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="assets/js/swiper.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="assets/css/swiper.min.css" />
+		<script type="text/javascript">
+			var news = new Vue({
+				el: '#news',
+				data: {
+					items: [] //列表信息流数据
+				},
+				beforeMount() {
+					console.log(this.items)
+				}
+			});
+			var lastId = 3; //最新新闻的id
+			var isEndPage = false;
+			var webview_detail = null; //详情页webview
+			var titleNView = { //详情页原生导航配置
+				backgroundColor: '#f7f7f7', //导航栏背景色
+				titleText: '', //导航栏标题
+				titleColor: '#000000', //文字颜色
+				type: 'transparent', //透明渐变样式
+				autoBackButton: true, //自动绘制返回箭头
+				splitLine: { //底部分割线
+					color: '#cccccc'
+				}
+			}
+			//mui初始化，配置下拉刷新
+			mui.init({
+				pullRefresh: {
+					container: '#news',
+					down: {
+						style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+						color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+						height: '50px', //可选,默认50px.下拉刷新控件的高度,
+						range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+						offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+						auto: true, //可选,默认false.首次加载自动上拉刷新一次
+						callback: pullDownRefresh
+					},
+				}
+			});
+
+			function pullDownRefresh() {
+				lastId = 3;
+				if (window.plus && plus.networkinfo.getCurrentType() === plus.networkinfo.CONNECTION_NONE) {
+					plus.nativeUI.toast('似乎已断开与互联网的连接', {
+						verticalAlign: 'top'
+					});
+					return;
+				}
+				//请求列表信息流
+				mui.post(API + 'publishcontent/outstanding_results', { //注意格式http://... 
+					page: lastId,
+					size: 4
+				}, function(rsp) {
+					console.log(rsp)
+					//mui('#news').pullRefresh().endPulldown();
+					if (rsp) {
+						lastId++; //保存最新消息的id，方便下拉刷新时使用
+						news.items = convert(rsp);
+					}
+				}, 'json');
+			}
+
+			function pullupRefresh() {
+				if (window.plus && plus.networkinfo.getCurrentType() === plus.networkinfo.CONNECTION_NONE) {
+					plus.nativeUI.toast('似乎已断开与互联网的连接', {
+						verticalAlign: 'top'
+					});
+					return;
+				}
+				//请求列表信息流
+				mui.post(API + 'publishcontent/outstanding_results', { //注意格式http://... 
+					page: lastId,
+					size: 4
+				}, function(rsp) {
+					//mui('#news').pullRefresh().endPullupToRefresh(isEndPage); //参数为true代表没有更多数据了。								
+					if (rsp) {
+						lastId++; //保存最新消息的id，方便下拉刷新时使用
+						news.items = news.items.concat(convert(rsp));
+					}
+				}, 'json');
+			}
+
+			mui.plusReady(function() {
+				//预加载详情页
+				webview_detail = mui.preload({
+					url: 'news/news-detail.html',
+					id: 'news-detail',
+					styles: {
+						"render": "always",
+						"popGesture": "hide",
+						"bounce": "vertical",
+						"bounceBackground": "#efeff4",
+						"titleNView": titleNView
+					}
+				});
+
+				var backButtonPress = 0;
+				mui.back = function(event) {
+					backButtonPress++;
+					if (backButtonPress > 1) {
+						plus.runtime.quit();
+					} else {
+						plus.nativeUI.toast('再按一次退出应用');
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1000);
+					return false;
+				};
+			});
+
+			/**
+			 * 打开新闻详情
+			 * 
+			 * @param {Object} item 当前点击的新闻对象
+			 */
+			function open_detail(item) {
+
+				//触发子窗口变更新闻详情
+				mui.fire(webview_detail, 'get_detail', {
+					guid: item.guid,
+					title: item.title,
+					author: item.author,
+					time: item.time,
+					cover: item.cover,
+					firstPicture: item.firstPicture
+				});
+
+				//更改详情页原生导航条信息
+				titleNView.titleText = item.title;
+				webview_detail.setStyle({
+					"titleNView": titleNView
+				});
+				setTimeout(function() {
+					webview_detail.show("slide-in-right", 300);
+				}, 150);
+			}
+
+			/**
+			 * 1、将服务端返回数据，转换成前端需要的格式
+			 * 2、若服务端返回格式和前端所需格式相同，则不需要改功能
+			 * 
+			 * @param {Array} items 
+			 */
+			function convert(itemsorgs) {
+				var newItems = [];
+				var newscover = ''; //┭┮﹏┭┮ 变量名不可以有- news-cover
+				var itemsorg = itemsorgs.data.contents;
+				// console.log(itemsorg)
+				if (itemsorg == null) {
+					isEndPage = true;
+					return;
+				}
+				itemsorg.forEach(function(itemorg) {
+					// console.log(itemorg)
+					if (itemorg.imageIds.length > 0) {
+						newscover = API + "publishcontent/image/get/" + itemorg.imageIds[0];
+					} else
+						newscover = '../img/000.jpg';
+					newItems.push({
+						guid: itemorg.html_id,
+						title: itemorg.title,
+						author: itemorg.author,
+						cover: newscover,
+						time: itemorg.upload_time.replace("年", "/").replace("月", "/").replace("日", ""),
+						firstPicture: itemorg.firstPicture
+					});
+					// /var str = ""
+					// for(var i=0;i<itemorg.length;i++){
+					// 	str += ``
+					// }
+					var swiper = new Swiper('.swiper-container', {
+						// autoplay: true, //等同于以下设置
+						autoplay: {
+							delay: 3000,
+							stopOnLastSlide: false,
+							disableOnInteraction: true,
+						}
+					})
+				});
+				return newItems;
+			}
+			// var btn=document.getElementsByClassName("btn")[0]
+			// console.log(btn)
+			// btn.onclick=function(){
+			// 	localtion.assign("news/news-list.html"
+			// }
+
+
+			// **************************************************************************************
+			mui(".mui-table-view + .mui-grid-view").on('tap','.mui-table-view-cell',function(){
+				//获取id
+				// var id = this.getAttribute("id");
+
+				var tabBarId = this.getAttribute("tabBarId");
+
+				//传值给详情页面，通知加载新数据
+				// ***************** 这里应该需要传至给index.html 通知index.html, 进行webView的管理
+				mui.fire(detail,'getDetail',{id:id});
+
+
+				// ****************** 或者 根据 tabBarId 直接打开你在index.html 中配置的WebView里,进行相应的open,打开
+				//打开新闻详情
+
+				// ********** 这里需要你看着写。。。。
+				// mui.openWindow({
+				// 	id:'detail',
+				// 	url:'detail.html'
+				// });
+			})
+
+
+		</script>
+	</body>
+
+</html>

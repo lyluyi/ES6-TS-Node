@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <h2 id="title" >title</h2>
+        <button id="btn">btn</button>
+    </div>
+</body>
+</html>
+
+<script>
+
+
+    var data = {
+        title: 'title111',
+        list: ['111', '222', '333']
+    }
+    //
+    // Object.defineProperty(data, 'title', {
+    //     get () {
+    //         console.log('get访问了：title 属性 ')
+    //         return '新的值'
+    //     },
+    //     set (newValue) {
+    //         console.log('设置了新值')
+    //         console.log(newValue)
+    //     }
+    //
+    // })
+    //
+    // console.log( data.title )  // 新的值
+    //
+    // data.title = '设置了新值' //
+    //
+    // console.log( data.title ) // 新的值
+
+
+    // 数据劫持 转成getter和setter的方法
+
+
+    observer(data)
+    console.log(data)
+
+    function observer(obj) {
+
+        Object.keys(obj).forEach((item) => {
+            defineReactive(obj, item, obj[item])
+        })
+
+
+        function defineReactive(obj, key, value) {
+
+            Object.defineProperty(obj, key, {
+
+                get () {
+                    return value
+                },
+                set (newValue) {
+                    value = newValue
+                }
+
+            })
+
+        }
+
+    }
+
+
+    
+
+    var title = document.getElementById('title')
+    var btn = document.getElementById("btn")
+
+    title.innerHTML = data.title
+
+    btn.onclick = function () {
+        data.title = '数据change'
+        title.innerHTML = data.title
+    }
+
+
+
+
+
+</script>

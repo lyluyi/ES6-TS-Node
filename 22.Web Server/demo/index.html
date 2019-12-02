@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title></title>
+        <link href="css/mui.min.css" rel="stylesheet" />
+        <style>
+        </style>
+    </head>
+
+    <body>
+        <div class="mui-content">
+            <nav id="bar" class="mui-bar mui-bar-tab">
+				<a class="mui-tab-item mui-active" href="tab-firstpage-home.html" data-id="wdsy" tabBar="aaa1">
+				    <span class="mui-icon mui-icon-home"></span>
+				    <span class="mui-tab-label">首页</span>
+				</a>
+                <a class="mui-tab-item" href="news/news-list.html" data-id="main" tabBar="aaa2" >
+                    <span class="mui-icon mui-icon-bars"></span>
+                    <span class="mui-tab-label">新闻</span>
+                </a>
+                <a class="mui-tab-item" href="tab-firstpage-basesearch.html" data-id="xkdt" tabBar="aaa3">
+                    <span class="mui-icon mui-icon-search"></span>
+                    <span class="mui-tab-label">基础检索</span>
+                </a>
+                 <a class="mui-tab-item" href="tab-firstpage-interative.html" data-id="jhcx" tabBar="aaa4">
+                    <span class="mui-icon mui-icon-map"></span>
+                    <span class="mui-tab-label">交互查询</span>
+                </a>               
+                <a class="mui-tab-item" href="tab-firstpage-multidimensional.html" data-id="yxl" tabBar="aaa4">
+                    <span class="mui-icon mui-icon-contact"></span>
+                    <span class="mui-tab-label">多维统计</span>
+                </a>
+                <a class="mui-tab-item" href="tab-firstpage-me.html" data-id="me">
+                    <span class="mui-icon mui-icon-gear"></span>
+                    <span class="mui-tab-label">更多</span>
+                </a>
+            </nav>
+        </div>
+        <script src="js/mui.min.js"></script>
+        <script>
+            mui.init();
+            mui.plusReady(function() {
+                var self = plus.webview.currentWebview();
+                var current = '';
+                var styles = {
+                    top: '0',
+                    bottom: '50px'
+                };                
+                var tabsConfig = {
+					wdsy: {
+					    url: 'tab-firstpage-home.html',
+					    styles: styles,
+					    default: true
+					}, 
+                    main: {
+                        url: 'news/news-list.html',
+                        styles: styles,
+                    },  
+                    xkdt: {
+                     	url:"tab-firstpage-basesearch.html",
+                        styles: styles
+                    },
+                    jhcx:{
+                    	url:"tab-firstpage-interative.html",
+                    	 styles: styles
+                    },
+                    yxl: {
+                        url: 'tab-firstpage-multidimensional.html',
+                        styles: styles
+                    },
+                    me: {
+                        url: 'tab-firstpage-me.html',
+                        styles: styles
+                    }
+                };
+                var tabs = {};
+                for (id in tabsConfig) {
+                    tabs[id] = plus.webview.create(tabsConfig[id].url, id, tabsConfig[id].styles);
+                    if (tabsConfig[id]['default']) {
+                        self.append(tabs[id]);
+                        current = id;
+                    }
+                }
+                mui('#bar').on('tap', 'a', function(e) {
+                    if (current == this.dataset.id) {
+                        return;
+                    }
+                    tabs[this.dataset.id].show();
+                    tabs[current].hide();
+                    current = this.dataset.id;
+                });
+		     document.getElementById('bar').style.top = (plus.display.resolutionHeight - 50) + "px";
+           });
+
+            mui("#bar").on('tap','.mui-tab-item',function(){
+                //获取id
+                // var id = this.getAttribute("id");
+
+                var id = this.getAttribute("data-id");
+
+                console.log(id)
+
+            })
+
+        </script>
+    </body>
+</html>
